@@ -6,7 +6,7 @@ from category.models import Category
 # Create your models here.
 
 class Product(models.Model):
-    productName = models.CharField(max_length=100, unique=True)
+    product_name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(max_length=250, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=10)
@@ -18,8 +18,8 @@ class Product(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.productName
+        return self.product_name
 
     class Meta:
-        ordering = ['productName']
+        ordering = ['product_name']
         verbose_name_plural = 'Products'

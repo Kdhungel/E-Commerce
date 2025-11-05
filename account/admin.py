@@ -4,33 +4,31 @@ from .models import Account
 
 
 class AccountAdmin(UserAdmin):
-    # Fields to display in the list view
     list_display = (
-    'email', 'userName', 'fName', 'lName', 'lastLogin', 'dateJoined', 'is_active', 'is_staff', 'is_admin')
+        'email', 'username', 'first_name', 'last_name',
+        'last_login', 'date_joined', 'is_active', 'is_staff', 'is_admin'
+    )
+    list_display_links = ('email', 'username')
+    readonly_fields = ('date_joined', 'last_login')
+    search_fields = ('email', 'username', 'first_name', 'last_name')
+    ordering = ('first_name',)
 
-    # Make some fields readonly
-    readonly_fields = ('password', 'dateJoined', 'lastLogin')
-    search_fields = ('userName','email')  # Makes username searchable
-    list_display_links = ('userName','email')  # Makes username clickable to open detail page
-
-    # Fields for creating/editing users in admin
     fieldsets = (
-        (None, {'fields': ('email', 'userName', 'fName', 'lName', 'password')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_admin', 'is_superadmin')}),
-        ('Important dates', {'fields': ('lastLogin', '-dateJoined')}),
+        (None, {'fields': ('email', 'username', 'first_name', 'last_name', 'password')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_admin', 'is_super_admin')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': (
-            'email', 'userName', 'fName', 'lName', 'password1', 'password2', 'is_active', 'is_staff', 'is_admin',
-            'is_superadmin')}
-         ),
+                'email', 'username', 'first_name', 'last_name',
+                'password1', 'password2', 'is_active', 'is_staff', 'is_admin', 'is_super_admin'
+            ),
+        }),
     )
 
-    search_fields = ('email', 'userName', 'fName', 'lName')
-    ordering = ('fName',)
     filter_horizontal = ()
     list_filter = ()
 
